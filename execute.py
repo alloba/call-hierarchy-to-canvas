@@ -27,5 +27,6 @@ if __name__ == '__main__':
         print(v)
     except TypeError as e:
         parser.print_help()
+        sys.exit(1)
 
 
