@@ -1,0 +1,51 @@
+graph 1 65.489 3.875
+node "PlatformProductRepository.getProductByProductId" 2.9285 1.375 5.8569 0.5 "PlatformProductRepository.getProductByProductId" solid ellipse black lightgrey
+node "CopyMetadataService.copyMetadataToNewFeProductId" 42.704 3.625 6.407 0.5 "CopyMetadataService.copyMetadataToNewFeProductId" solid ellipse black lightgrey
+node "PlatformProductService.getProductByProductId" 9.099 1.75 5.4841 0.5 "PlatformProductService.getProductByProductId" solid ellipse black lightgrey
+node "PlatformProductService.updateRop" 9.099 1 4.1133 0.5 "PlatformProductService.updateRop" solid ellipse black lightgrey
+node "PlatformProductService.updateUpc" 9.099 0.25 4.113 0.5 "PlatformProductService.updateUpc" solid ellipse black lightgrey
+node "MetadataController.copyMetadataToNewFeId" 51.697 3.625 5.2896 0.5 "MetadataController.copyMetadataToNewFeId" solid ellipse black lightgrey
+node "MetadataService.getDigiCreationContract" 15.723 1.75 4.8279 0.5 "MetadataService.getDigiCreationContract" solid ellipse black lightgrey
+node "PlatformProductController.getPlatformProduct" 15.723 2.5 5.3502 0.5 "PlatformProductController.getPlatformProduct" solid ellipse black lightgrey
+node "MetadataService.queueMessagesForProductCreation" 22.988 1.75 5.9898 0.5 "MetadataService.queueMessagesForProductCreation" solid ellipse black lightgrey
+node "MetadataService.updateMetadataRecord" 29.203 1.5417 4.6635 0.5 "MetadataService.updateMetadataRecord" solid ellipse black lightgrey
+node "MetadataController.createMetadataProduct" 42.704 1.375 4.9467 0.5 "MetadataController.createMetadataProduct" solid ellipse black lightgrey
+node "MetadataService.createMetadataRecord" 34.821 2.125 4.5886 0.5 "MetadataService.createMetadataRecord" solid ellipse black lightgrey
+node "ProductMetadataUpserter.updateExistingProduct" 34.821 0.79167 5.5731 0.5 "ProductMetadataUpserter.updateExistingProduct" solid ellipse black lightgrey
+node "PlatformProductCreationService.createProductMetadataAndInsertPlatformProduct" 42.704 2.875 9.1929 0.5 "PlatformProductCreationService.createProductMetadataAndInsertPlatformProduct" solid ellipse black lightgrey
+node "ProductMetadataUpserter.createNewProduct" 42.704 2.125 5.1103 0.5 "ProductMetadataUpserter.createNewProduct" solid ellipse black lightgrey
+node "MetadataController.createProductMetadataAndInsertPlatformProduct" 51.697 2.875 7.7924 0.5 "MetadataController.createProductMetadataAndInsertPlatformProduct" solid ellipse black lightgrey
+node "ProductMetadataUpserter.upsert" 51.697 1.4306 3.7849 0.5 "ProductMetadataUpserter.upsert" solid ellipse black lightgrey
+node "ProductIngestionOrchestrator.orchestrate" 58.454 1.4306 4.7233 0.5 "ProductIngestionOrchestrator.orchestrate" solid ellipse black lightgrey
+node "ProductDataIngestionListener.listen" 63.402 1.4306 4.1727 0.5 "ProductDataIngestionListener.listen" solid ellipse black lightgrey
+node "RopUpdatedProductEventListener.updateProductMetadata" 15.723 1 6.616 0.5 "RopUpdatedProductEventListener.updateProductMetadata" solid ellipse black lightgrey
+node "RopUpdatedProductEventListener.handleRopUpdatedEvent" 22.988 1 6.7652 0.5 "RopUpdatedProductEventListener.handleRopUpdatedEvent" solid ellipse black lightgrey
+node "UpcUpdatedProductEventListener.handleUpcUpdatedEvent" 15.723 0.25 6.7646 0.5 "UpcUpdatedProductEventListener.handleUpcUpdatedEvent" solid ellipse black lightgrey
+edge "PlatformProductRepository.getProductByProductId" "CopyMetadataService.copyMetadataToNewFeProductId" 10 3.7471 1.6151 5.7637 2.1845 11.14 3.5694 15.723 3.5694 15.723 3.5694 15.723 3.5694 29.203 3.5694 32.667 3.5694 36.632 3.588 39.364 3.6036 solid black
+edge "PlatformProductRepository.getProductByProductId" "PlatformProductService.getProductByProductId" 4 5.3186 1.5203 5.762 1.5472 6.2257 1.5754 6.6704 1.6024 solid black
+edge "PlatformProductRepository.getProductByProductId" "PlatformProductService.updateRop" 4 5.3186 1.2297 5.9135 1.1936 6.5448 1.1552 7.1177 1.1204 solid black
+edge "PlatformProductRepository.getProductByProductId" "PlatformProductService.updateUpc" 7 3.9071 1.1392 4.5907 0.97988 5.526 0.77246 6.3569 0.625 6.7277 0.5592 7.1285 0.49854 7.5061 0.44604 solid black
+edge "CopyMetadataService.copyMetadataToNewFeProductId" "MetadataController.copyMetadataToNewFeId" 4 45.698 3.5361 46.787 3.5288 48.01 3.5297 49.065 3.5388 solid black
+edge "CopyMetadataService.copyMetadataToNewFeProductId" "MetadataController.copyMetadataToNewFeId" 4 45.698 3.7139 46.787 3.7212 48.01 3.7203 49.065 3.7112 solid black
+edge "PlatformProductService.getProductByProductId" "MetadataService.getDigiCreationContract" 4 11.841 1.75 12.28 1.75 12.732 1.75 13.166 1.75 solid black
+edge "PlatformProductService.getProductByProductId" "PlatformProductController.getPlatformProduct" 7 10.79 1.9471 11.289 2.0049 11.837 2.0679 12.341 2.125 12.829 2.1802 13.356 2.2391 13.846 2.2934 solid black
+edge "PlatformProductService.updateRop" "RopUpdatedProductEventListener.updateProductMetadata" 4 11.159 1 11.514 1 11.892 1 12.272 1 solid black
+edge "PlatformProductService.updateUpc" "UpcUpdatedProductEventListener.handleUpcUpdatedEvent" 4 11.159 0.25 11.491 0.25 11.842 0.25 12.197 0.25 solid black
+edge "MetadataService.getDigiCreationContract" "MetadataService.queueMessagesForProductCreation" 4 18.137 1.75 18.685 1.75 19.274 1.75 19.846 1.75 solid black
+edge "MetadataService.queueMessagesForProductCreation" "MetadataService.updateMetadataRecord" 4 25.768 1.6568 26.123 1.6449 26.484 1.6328 26.832 1.6211 solid black
+edge "MetadataService.updateMetadataRecord" "MetadataController.createMetadataProduct" 4 31.52 1.5131 33.907 1.4836 37.621 1.4377 40.107 1.4071 solid black
+edge "MetadataService.updateMetadataRecord" "MetadataService.createMetadataRecord" 4 30.881 1.7159 31.554 1.7858 32.331 1.8665 33.016 1.9376 solid black
+edge "MetadataService.updateMetadataRecord" "ProductMetadataUpserter.updateExistingProduct" 4 30.664 1.3466 31.417 1.2461 32.339 1.1229 33.124 1.0182 solid black
+edge "MetadataService.createMetadataRecord" "CopyMetadataService.copyMetadataToNewFeProductId" 7 35.39 2.3686 36.036 2.6333 37.127 3.0456 38.107 3.25 38.631 3.3592 39.195 3.437 39.742 3.4923 solid black
+edge "MetadataService.createMetadataRecord" "MetadataController.createMetadataProduct" 7 36.358 1.9392 36.909 1.8754 37.536 1.8059 38.107 1.75 38.912 1.6713 39.796 1.5964 40.573 1.5345 solid black
+edge "MetadataService.createMetadataRecord" "PlatformProductCreationService.createProductMetadataAndInsertPlatformProduct" 7 36.358 2.3108 36.909 2.3746 37.536 2.4441 38.107 2.5 38.683 2.5563 39.299 2.6107 39.888 2.6597 solid black
+edge "MetadataService.createMetadataRecord" "ProductMetadataUpserter.createNewProduct" 4 37.117 2.125 38.02 2.125 39.065 2.125 40.004 2.125 solid black
+edge "ProductMetadataUpserter.updateExistingProduct" "ProductMetadataUpserter.upsert" 7 37.605 0.77374 40.136 0.77275 43.971 0.80952 47.3 1 48.249 1.0543 49.308 1.1568 50.15 1.2482 solid black
+edge "PlatformProductCreationService.createProductMetadataAndInsertPlatformProduct" "MetadataController.createProductMetadataAndInsertPlatformProduct" 4 47.306 2.875 47.422 2.875 47.539 2.875 47.655 2.875 solid black
+edge "ProductMetadataUpserter.createNewProduct" "ProductMetadataUpserter.upsert" 4 44.711 1.97 46.273 1.8494 48.421 1.6835 49.921 1.5676 solid black
+edge "ProductMetadataUpserter.upsert" "ProductIngestionOrchestrator.orchestrate" 4 53.481 1.3468 54.283 1.336 55.24 1.3339 56.1 1.3407 solid black
+edge "ProductMetadataUpserter.upsert" "ProductIngestionOrchestrator.orchestrate" 4 53.481 1.5143 54.283 1.5252 55.24 1.5272 56.1 1.5204 solid black
+edge "ProductIngestionOrchestrator.orchestrate" "ProductDataIngestionListener.listen" 4 60.646 1.3373 60.869 1.3365 61.095 1.3366 61.316 1.3378 solid black
+edge "ProductIngestionOrchestrator.orchestrate" "ProductDataIngestionListener.listen" 4 60.646 1.5238 60.869 1.5246 61.095 1.5245 61.316 1.5233 solid black
+edge "RopUpdatedProductEventListener.updateProductMetadata" "RopUpdatedProductEventListener.handleRopUpdatedEvent" 4 19.032 1 19.173 1 19.316 1 19.458 1 solid black
+stop
