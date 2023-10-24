@@ -5,6 +5,12 @@ import graphviz
 from treegen import ParseTreeNode
 
 
+X_OFFSET = 80
+Y_OFFSET = 80
+WIDTH_OFFSET = 80
+HEIGHT_OFFSET = 80
+
+
 class DotNode:
     def __init__(self, uid: uuid.UUID, label: str, x: float, y: float, width: float, height: float):
         self.id = uid
@@ -15,7 +21,7 @@ class DotNode:
         self.height = height
 
     def to_json_string(self):
-        return f' {{  "type":"text", "text":{self.label}, "id":"{self.id}", "x": {float(self.x) * 80}, "y": {float(self.y) * 80}, "width":{float(self.width) * 80}, "height":{float(self.height) * 80}  }}'
+        return f' {{  "type":"text", "text":{self.label}, "id":"{self.id}", "x": {self.x * X_OFFSET}, "y": {self.y * Y_OFFSET}, "width":{self.width * WIDTH_OFFSET}, "height":{self.height * HEIGHT_OFFSET}  }}'
 
 
 class DotEdge:
@@ -83,12 +89,12 @@ def plain_dot_to_canvas(dot_text: str) -> str:
     splitter = ',\n        '
 
     return f'''
-    {{ 
+{{ 
     "nodes": [
         {splitter.join([node.to_json_string() for node in nodes])}
     ],
     "edges": [
         {splitter.join([edge.to_json_string() for edge in edges])}
     ]
-    }}
+}}
 '''
