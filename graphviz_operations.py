@@ -1,0 +1,94 @@
+import uuid
+
+import graphviz
+
+from treegen import ParseTreeNode
+
+
+class DotNode:
+    def __init__(self, uid: uuid.UUID, label: str, x: float, y: float, width: float, height: float):
+        self.id = uid
+        self.label = label
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+
+    def to_json_string(self):
+        return f'\n {{  "type":"text", "text":{self.label}, "id":"{self.id}", "x": {float(self.x) * 80}, "y": {float(self.y) * 80}, "width":{float(self.width) * 80}, "height":{float(self.height) * 80}  }}'
+
+
+class DotEdge:
+    def __init__(self, uid: uuid.UUID, from_node: uuid.UUID, from_side: str, to_node: uuid.UUID, to_side: str):
+        self.id = uid
+        self.from_node = from_node
+        self.to_node = to_node
+        self.from_side = from_side
+        self.to_side = to_side
+
+    def to_json_string(self):
+        return f'\n {{ "id":"{self.id}", "fromNode":"{self.from_node}", "fromSide":"{self.from_side}", "toNode":"{self.to_node}", "toSide":"{self.to_side}"  }}'
+
+
+def tree_to_graphviz_rawtext(node: ParseTreeNode) -> str:
+    def tree_walk(child_node: ParseTreeNode) -> str:
+        if len(child_node.children) == 0:
+            return ''
+
+        text = ''
+        for child in child_node.children:
+            text += f' "{child_node.text}" -> "{child.text}"\n'
+
+        for child in child_node.children:
+            text += tree_walk(child)
+        return text
+
+    return 'digraph {\n rankdir=LR;\n' + tree_walk(node) + '\n}'
+
+
+def render_dot(dot_text: str) -> str:
+    graph = graphviz.Source(dot_text)
+    return graph.pipe(format='plain').decode('utf-8')
+
+
+def plain_dot_to_canvas(dot_text: str) -> str:
+    lines = dot_text.strip().splitlines()
+    nodes = []
+    edges = []
+    for line in lines:
+        if line.startswith('node'):
+            nodes.append(DotNode(
+                uid=uuid.uuid4(),
+                label=line.split(' ')[1],
+                x=float(line.split(' ')[2]),
+                y=float(line.split(' ')[3]),
+                width=float(line.split(' ')[4]),
+                height=float(line.split(' ')[5]),
+
+            ))  # name, label, x, y, width, height
+            # nodes.append([line.split(' ')[1], line.split(' ')[2], line.split(' ')[3], line.split(' ')[4], line.split(' ')[5], uuid.uuid4()])  # name, x, y, width, height, uuid
+    for line in lines:
+        if line.startswith('edge'):
+            from_node = [x for x in nodes if x.label == line.split(' ')[1]][0]
+            to_node = [x for x in nodes if x.label == line.split(' ')[2]][0]
+            edges.append(DotEdge(
+                uid=uuid.uuid4(),
+                from_node=from_node.id,
+                from_side='right',
+                to_node=to_node.id,
+                to_side='left'
+            ))
+            # edges.append([line.split(' ')[1], line.split(' ')[2]])  # tail, head
+
+
+    text = f'''
+    {{ 
+        "nodes": [
+            {','.join([node.to_json_string() for node in nodes])}
+        ],
+        "edges": [
+            {','.join([edge.to_json_string() for edge in edges])}
+        ]
+    }}
+    '''
+    return text
