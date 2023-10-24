@@ -21,7 +21,10 @@ class DotNode:
         self.height = height
 
     def to_json_string(self):
-        return f' {{  "type":"text", "text":{self.label}, "id":"{self.id}", "x": {self.x * X_OFFSET}, "y": {self.y * Y_OFFSET}, "width":{self.width * WIDTH_OFFSET}, "height":{self.height * HEIGHT_OFFSET}  }}'
+        label = self.label
+        if not label.startswith('"'):
+            label = f'"{self.label}"'
+        return f' {{  "type":"text", "text":{label}, "id":"{self.id}", "x": {self.x * X_OFFSET}, "y": {self.y * Y_OFFSET}, "width":{self.width * WIDTH_OFFSET}, "height":{self.height * HEIGHT_OFFSET}  }}'
 
 
 class DotEdge:
