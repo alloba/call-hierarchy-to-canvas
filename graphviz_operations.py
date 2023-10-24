@@ -15,7 +15,7 @@ class DotNode:
         self.height = height
 
     def to_json_string(self):
-        return f'\n {{  "type":"text", "text":{self.label}, "id":"{self.id}", "x": {float(self.x) * 80}, "y": {float(self.y) * 80}, "width":{float(self.width) * 80}, "height":{float(self.height) * 80}  }}'
+        return f' {{  "type":"text", "text":{self.label}, "id":"{self.id}", "x": {float(self.x) * 80}, "y": {float(self.y) * 80}, "width":{float(self.width) * 80}, "height":{float(self.height) * 80}  }}'
 
 
 class DotEdge:
@@ -27,7 +27,7 @@ class DotEdge:
         self.to_side = to_side
 
     def to_json_string(self):
-        return f'\n {{ "id":"{self.id}", "fromNode":"{self.from_node}", "fromSide":"{self.from_side}", "toNode":"{self.to_node}", "toSide":"{self.to_side}"  }}'
+        return f' {{ "id":"{self.id}", "fromNode":"{self.from_node}", "fromSide":"{self.from_side}", "toNode":"{self.to_node}", "toSide":"{self.to_side}"  }}'
 
 
 def tree_to_graphviz_rawtext(node: ParseTreeNode) -> str:
@@ -55,6 +55,7 @@ def plain_dot_to_canvas(dot_text: str) -> str:
     lines = dot_text.strip().splitlines()
     nodes = []
     edges = []
+
     for line in lines:
         if line.startswith('node'):
             nodes.append(DotNode(
@@ -66,7 +67,7 @@ def plain_dot_to_canvas(dot_text: str) -> str:
                 height=float(line.split(' ')[5]),
 
             ))  # name, label, x, y, width, height
-            # nodes.append([line.split(' ')[1], line.split(' ')[2], line.split(' ')[3], line.split(' ')[4], line.split(' ')[5], uuid.uuid4()])  # name, x, y, width, height, uuid
+
     for line in lines:
         if line.startswith('edge'):
             from_node = [x for x in nodes if x.label == line.split(' ')[1]][0]
@@ -78,17 +79,16 @@ def plain_dot_to_canvas(dot_text: str) -> str:
                 to_node=to_node.id,
                 to_side='left'
             ))
-            # edges.append([line.split(' ')[1], line.split(' ')[2]])  # tail, head
 
+    splitter = ',\n        '
 
-    text = f'''
+    return f'''
     {{ 
-        "nodes": [
-            {','.join([node.to_json_string() for node in nodes])}
-        ],
-        "edges": [
-            {','.join([edge.to_json_string() for edge in edges])}
-        ]
+    "nodes": [
+        {splitter.join([node.to_json_string() for node in nodes])}
+    ],
+    "edges": [
+        {splitter.join([edge.to_json_string() for edge in edges])}
+    ]
     }}
-    '''
-    return text
+'''
