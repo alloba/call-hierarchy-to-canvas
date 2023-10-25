@@ -45,7 +45,7 @@ def parse_text_to_tree(input_text: str) -> ParseTreeNode:
     text_lines = input_text.strip('\n').strip(' ').splitlines()
     text_lines = list([line.split('(')[0] for line in text_lines])
 
-    if len(text_lines):
+    if len(text_lines) == 1:
         return ParseTreeNode(text_lines[0].strip())
 
     parents = [x for x in text_lines if does_line_have_equal_indent_level(x, 0)]
