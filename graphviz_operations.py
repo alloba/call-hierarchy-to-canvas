@@ -52,6 +52,8 @@ def tree_to_graphviz_rawtext(node: ParseTreeNode) -> str:
             text += tree_walk(child)
         return text
 
+    if len(node.children) == 0:
+        return 'digraph {\n rankdir=LR;\n' + f' "{node.text}"\n' + '\n}'
     return 'digraph {\n rankdir=LR;\n' + tree_walk(node) + '\n}'
 
 
@@ -70,7 +72,7 @@ def plain_dot_to_canvas(dot_text: str) -> str:
             nodes.append(DotNode(
                 uid=uuid.uuid4(),
                 label=line.split(' ')[1],
-                x=float(line.split(' ')[2]),
+                x=float(line.split(' ')[2]),  #TODO - this fails when there are spaces in the label text
                 y=float(line.split(' ')[3]),
                 width=float(line.split(' ')[4]),
                 height=float(line.split(' ')[5]),
