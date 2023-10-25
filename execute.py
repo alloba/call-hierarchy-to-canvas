@@ -29,4 +29,7 @@ if __name__ == '__main__':
         parser.print_help()
         sys.exit(1)
 
+    # v = call_hierarchy_to_canvas('sample-call-graph-2.txt')
+    # print(v)
+
 

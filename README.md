@@ -1,8 +1,6 @@
 # call-hierarchy-to-canvas
 
-Convert a call graph from IntelliJ into an obsidian canvas file. 
-With the one caveat being that you must manually edit the call graph to include the origin point. :P
-
+Convert a call graph from IntelliJ into an obsidian canvas file.
 
 ## Requirements
 
