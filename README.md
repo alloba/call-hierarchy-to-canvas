@@ -4,7 +4,7 @@ Convert a call graph from IntelliJ into an obsidian canvas file.
 
 ## Requirements
 
-- Graphviz must be installed on the system. It is used as an intermediate step to calculate the layout of the graph.
+- Graphviz must be installed on the system. It is used as an intermediate step to calculate the layout of the graph. `brew install graphviz`
 - Python 3.8+
 - Python Libraries: 
   - graphviz
@@ -24,6 +24,10 @@ It is recommended to pipe the output either to a file or to your clipboard via `
 
 ```bash
 python execute.py -f sample-call-graph.txt
+OR
+python execute.py -t "input text here"
+OR
+cat {TEXT} | python execute.py
 ```
 
 An example input file is included in the source directory (`sample-call-graph.txt`)

@@ -24,8 +24,9 @@ if __name__ == '__main__':
         sys.exit(0)
 
     parser = argparse.ArgumentParser(description='Convert call hierarchy to obsidian canvas')
-    parser.add_argument('-f', '--file-path', type=str, required=False, help='path to call hierarchy file. must be space-indented text file.')
-    parser.add_argument('text', type=str)
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument('-f', '--file-path', type=str, required=False, help='path to call hierarchy file. must be space-indented text file.')
+    group.add_argument('-t', '--text', type=str,  required=False,)
     try:
         args = parser.parse_args()
         if args.file_path:
