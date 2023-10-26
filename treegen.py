@@ -16,7 +16,10 @@ class ParseTreeNode:
 def does_line_have_equal_indent_level(line: str, indent_level: int) -> bool:
     if indent_level == 0:
         return not line.startswith(ParseTreeNode.space_marker)
-    return line.startswith(ParseTreeNode.space_marker * ParseTreeNode.offset * indent_level) and not line[ParseTreeNode.offset * indent_level + 1] == ParseTreeNode.space_marker
+
+    return (line.startswith(ParseTreeNode.space_marker * ParseTreeNode.offset * indent_level)
+            and len(line) >= ParseTreeNode.offset * indent_level
+            and not line[ParseTreeNode.offset * indent_level] == ParseTreeNode.space_marker)
 
 
 def create_node(text_lines: List[str], position, indent_level) -> ParseTreeNode:
@@ -43,6 +46,7 @@ def create_node(text_lines: List[str], position, indent_level) -> ParseTreeNode:
 
 def parse_text_to_tree(input_text: str) -> ParseTreeNode:
     text_lines = input_text.strip('\n').strip(' ').splitlines()
+    text_lines = [line for line in text_lines if line.strip() != '']
     text_lines = list([line.split('(')[0] for line in text_lines])
 
     if len(text_lines) == 1:
