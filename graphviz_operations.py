@@ -1,6 +1,7 @@
 import uuid
 
 import graphviz
+import shlex
 
 from treegen import ParseTreeNode
 
@@ -69,20 +70,21 @@ def plain_dot_to_canvas(dot_text: str) -> str:
 
     for line in lines:
         if line.startswith('node'):
+            vals = shlex.split(line)
             nodes.append(DotNode(
                 uid=uuid.uuid4(),
-                label=line.split(' ')[1],
-                x=float(line.split(' ')[2]),  #TODO - this fails when there are spaces in the label text
-                y=float(line.split(' ')[3]),
-                width=float(line.split(' ')[4]),
-                height=float(line.split(' ')[5]),
+                label=vals[1],
+                x=float(vals[2]),
+                y=float(vals[3]),
+                width=float(vals[4]),
+                height=float(vals[5]),
 
             ))  # name, label, x, y, width, height
 
     for line in lines:
         if line.startswith('edge'):
-            from_node = [x for x in nodes if x.label == line.split(' ')[1]][0]
-            to_node = [x for x in nodes if x.label == line.split(' ')[2]][0]
+            from_node = [x for x in nodes if x.label == shlex.split(line)[1]][0]
+            to_node = [x for x in nodes if x.label == shlex.split(line)[2]][0]
             edges.append(DotEdge(
                 uid=uuid.uuid4(),
                 from_node=from_node.id,
